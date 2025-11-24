@@ -1,0 +1,137 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: '自传App',
+      debugShowCheckedModeBanner: false,
+      home: const HomePage(),
+    );
+  }
+}
+
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  String textContent = "";
+
+  void showShortText() {
+    setState(() {
+      
+      textContent =
+          "My name is Ling Cong Jun and I'm 21 years old. "
+          "I come from Malaysia and my hometown is call Sibu, a leisurely small town in Sarawak. "
+          "My department is the Department of Electronic Engineering. "
+          "In the same time, I like to playing badminton with other country's frind. "
+          "Also, because I was busy with schoolwork before, I now go to the gym to exercise. "
+          "Now that I've chosen this course, I can learn my new major in a much easier and less stressful way.";
+    });
+  }
+  void closeShortText() {
+    setState(() {
+
+      textContent = "";
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'Autobiography',
+          style: TextStyle(
+            fontSize: 32,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        backgroundColor: Colors.red,
+      ),
+
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+            Colors.white, 
+            Color(0xFFDDDDDD), 
+            Color(0xFFBBBBBB), 
+            ],
+          ),
+        ),
+        child: SafeArea(
+          child: Stack(
+            children: [
+              Column(
+                children: [
+                  Expanded(
+                    child: SingleChildScrollView(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 20,
+                      ),
+                      child: Text(
+                        textContent,
+                        style: const TextStyle(
+                          fontSize: 18,
+                          height: 1.4,
+                          color: Colors.black,
+                        ),
+                        textAlign: TextAlign.justify,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+
+              Align(
+                alignment: Alignment(0, 0.8),  
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                      onPressed: showShortText,
+                      child: const Text(
+                        'Show Content',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        ),
+                      ),
+                    ),
+
+                    const SizedBox(width: 20),
+
+                    ElevatedButton(
+                      onPressed: closeShortText,
+                      child: const Text(
+                        'Close Content',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
